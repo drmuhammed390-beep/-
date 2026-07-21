@@ -24,16 +24,18 @@ jobs:
           channel: 'stable'
 
       - name: Install Dependencies
+        working-directory: mmh_notebook
         run: flutter pub get
 
       - name: Build APK
+        working-directory: mmh_notebook
         run: flutter build apk --release
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v3
         with:
           name: Android-APK
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: mmh_notebook/build/app/outputs/flutter-apk/app-release.apk
 
   build-exe:
     name: Build Windows EXE
@@ -50,13 +52,15 @@ jobs:
         run: flutter config --enable-windows-desktop
 
       - name: Install Dependencies
+        working-directory: mmh_notebook
         run: flutter pub get
 
       - name: Build Windows Executable
+        working-directory: mmh_notebook
         run: flutter build windows --release
 
       - name: Upload Windows Bundle Artifact
         uses: actions/upload-artifact@v3
         with:
           name: Windows-EXE-App
-          path: build/windows/runner/Release/
+          path: mmh_notebook/build/windows/runner/Release/
